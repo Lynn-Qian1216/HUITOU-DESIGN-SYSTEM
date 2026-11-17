@@ -1,0 +1,32 @@
+<!-- @dsCard group="组件" viewport="700x400" name="导航" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:400px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { SidebarNav, Tabs, Breadcrumbs, TopBar, Pagination, IconButton, Avatar, FilterBar, FilterSelect, Input, Button, Checkbox } = window.HUITOUAIDesignSystem_52606d;
+
+function Demo(){
+const [tab,setTab]=React.useState('flagged');const [nav,setNav]=React.useState('diagnosis');const [ty,setTy]=React.useState('全部类型');const [un,setUn]=React.useState(false);
+return <><div style={{display:'flex',gap:18,height:260}}>
+<div style={{border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)',overflow:'hidden',height:'100%'}}>
+<SidebarNav activeId={nav} onSelect={setNav} style={{border:0,width:200}}
+ header={<img src="../../assets/logo-wordmark.svg" style={{height:20}}/>}
+ sections={[{label:'工作区',items:[{id:'overview',label:'总览',icon:'layout-dashboard'},{id:'diagnosis',label:'诊断',icon:'stethoscope',badge:'4'},{id:'strategy',label:'策略',icon:'lightbulb'},{id:'campaigns',label:'广告系列',icon:'megaphone'}]},{label:'账户',items:[{id:'connections',label:'数据连接',icon:'plug'},{id:'settings',label:'设置',icon:'settings'}]}]}/>
+</div>
+<div style={{flex:1,display:'flex',flexDirection:'column',gap:14,minWidth:0}}>
+<TopBar sticky={false} left={<Breadcrumbs items={[{label:'账户'},{label:'Northwind DTC'},{label:'拉新 — 美国'}]}/>} actions={<><IconButton icon="bell" label="通知"/><Avatar name="Lin Zhao" size="sm"/></>} style={{border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)',padding:'0 14px'}}/>
+<Tabs value={tab} onChange={setTab} items={[{id:'all',label:'全部',count:42},{id:'flagged',label:'已标记',icon:'triangle-alert',count:4},{id:'auto',label:'自动执行',icon:'sparkles',count:11}]}/>
+<Pagination page={2} pageCount={9} total={412} onChange={()=>{}}/>
+</div></div>
+<div style={{marginTop:18}}><div className="lbl">筛选条 · trailing 自动靠右</div>
+<div style={{border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)'}}>
+<FilterBar inset trailing={<Button variant="ghost" size="sm" iconLeft="download">导出</Button>}>
+<Input placeholder="搜索商品名称/ID" iconLeft="search" style={{flex:'1 1 160px',minWidth:0,maxWidth:220}}/>
+<FilterSelect value={ty} onChange={setTy} width={132} options={[{label:'全部类型',count:24},{label:'鸡肉零食',count:11},{label:'素食零食',count:13},{label:'组合装',count:0}]}/>
+<Checkbox checked={un} onChange={()=>setUn(!un)} label="只看未投放商品"/>
+</FilterBar></div></div></>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

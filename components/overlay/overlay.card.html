@@ -1,0 +1,39 @@
+<!-- @dsCard group="组件" viewport="700x360" name="浮层" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:360px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { Dialog, Popover, Tooltip, DropdownMenu, Button, IconButton, Icon, AnchoredPanel } = window.HUITOUAIDesignSystem_52606d;
+
+/* AnchoredPanel 是浮层底座：fixed 定位，越界自动回位，外点与 Esc 关闭。 */
+function AnchoredDemo(){
+  const t=React.useRef(null);const [open,setOpen]=React.useState(false);
+  return <><span ref={t} style={{display:'inline-flex'}}><Button variant="secondary" size="sm" iconRight="chevron-down" onClick={()=>setOpen(o=>!o)}>近 30 天</Button></span>
+  {open?<AnchoredPanel anchor={t} matchWidth onClose={()=>setOpen(false)} style={{padding:'var(--space-2)'}}>
+    {['近 7 天','近 30 天','本季度至今'].map(x=>
+      <button key={x} type="button" onClick={()=>setOpen(false)}
+        onMouseEnter={e=>{e.currentTarget.style.background='var(--surface-hover)'}}
+        onMouseLeave={e=>{e.currentTarget.style.background='transparent'}}
+        style={{display:'block',width:'100%',height:30,padding:'0 var(--space-5)',border:0,borderRadius:'var(--radius-xs)',background:'transparent',font:'inherit',fontSize:'var(--fs-13)',textAlign:'left',cursor:'pointer',color:'var(--text-primary)'}}>{x}</button>)}
+  </AnchoredPanel>:null}</>;
+}
+
+function Demo(){return <div style={{display:'flex',gap:18,alignItems:'flex-start'}}>
+<div style={{flex:'0 0 380px',position:'relative',height:250,overflow:'hidden',borderRadius:'var(--radius-card)',border:'1px solid var(--border-subtle)'}}>
+<Dialog open title="确认应用策略？" description="4 个广告组的预算将立即变更。" onClose={()=>{}}
+ width={340} style={{position:'static'}}
+ footer={<><Button>取消</Button><Button variant="primary">应用</Button></>}>
+<span style={{fontSize:13,color:'var(--text-secondary)'}}>将每日 ¥1,200 从「再营销 — DTC」转向「拉新 — 美国」。HUITOU 将监控 72 小时，若 CPA 恶化超过 15% 则自动回滚。</span>
+</Dialog></div>
+<div style={{display:'flex',flexDirection:'column',gap:22,paddingTop:12}}>
+<div><div className="lbl">文字提示</div><Tooltip label="2 分钟前同步" placement="right"><Button variant="secondary" iconLeft="refresh-cw" size="sm">同步</Button></Tooltip></div>
+<div><div className="lbl">信息浮层</div><Popover placement="right" width={220} content={<span>覆盖 3 个广告系列的 21 天转化数据，置信度：高。</span>}><Button variant="ghost" size="sm" iconLeft="info">为何如此？</Button></Popover></div>
+<div><div className="lbl">浮层底座</div><AnchoredDemo/></div>
+<div><div className="lbl">下拉菜单</div><DropdownMenu trigger={<Button variant="secondary" size="sm" iconRight="chevron-down">操作</Button>}
+ items={[{id:'dup',label:'复制',icon:'copy',shortcut:'⌘D'},{id:'exp',label:'导出 CSV',icon:'download'},{divider:true},{id:'del',label:'删除',icon:'trash-2',tone:'danger'}]}/></div>
+</div></div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

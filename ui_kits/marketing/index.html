@@ -1,0 +1,27 @@
+<!-- @dsCard group="官网" viewport="1440x900" name="官网首页" subtitle="首屏、四阶段闭环、效果数据、价格与行动号召" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>HUITOU AI —— 每个广告账户，都有 AI 投手</title><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="data.js"></script>
+<style>html,body{margin:0}#root{background:var(--surface-page)}</style></head>
+<body><div id="root"></div>
+<script type="text/babel" src="SiteChrome.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Sections.jsx"></script>
+<script type="text/babel" data-presets="react">
+(() => {
+function Site(){return <>
+  <SiteHeader/>
+  <Hero/>
+  <HowItWorks/>
+  <Proof/>
+  <Quote/>
+  <Pricing/>
+  <CTA/>
+  <SiteFooter/>
+</>;}
+ReactDOM.createRoot(document.getElementById('root')).render(<Site/>);
+})();
+</script></body></html>

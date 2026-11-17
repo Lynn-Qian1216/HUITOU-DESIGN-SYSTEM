@@ -1,0 +1,74 @@
+<!-- @dsCard group="交互设计思维记录" viewport="1000x1400" name="信息密度与说明文字" subtitle="问号收纳、字号阶梯、留白与省略 —— 高密度控制台的克制原则" -->
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>信息密度与说明文字设计笔记</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="note.css">
+</head>
+<body>
+<doc-page margin="0.85in">
+<h1>信息密度与说明文字</h1>
+<p class="sub">HUITOU AI 控制台 · 全局 · 交互决策与理由</p>
+<div class="rule"></div>
+
+<p>用户一天在里面待四到八小时，看的是同样几张表。这个前提改变了很多默认判断：网页里友好的东西——宽松的字号、充足的行距、常驻的说明——在这里成了每天重复看几十遍的成本。</p>
+
+<h2><span class="n">01</span>说明文字：收进问号</h2>
+
+<p>所有解释性副文都收进标题旁的问号（InfoHint），悬停展开：页面标题的说明、卡片的说明性副标题、指标格的注解。</p>
+<div class="why"><b>理由：</b>解释只在第一次有用，第二次起就是每次都要跳过的灰字，而它占的是标题正下方最显眼的位置。收起之后，第一屏只有标题、数据和操作。</div>
+
+<h3>什么保留常驻</h3>
+<ul>
+<li><b>随数据变化的副文</b>——倒计时、计费周期、数据时效。这些不是解释，是信息。</li>
+<li><b>空状态的说明</b>——那句话就是这块区域的全部内容，收起来什么都不剩。</li>
+<li><b>表单字段的 hint</b>——填写时要同时看到规则，藏起来就得边填边悬停。</li>
+</ul>
+<div class="why"><b>判断标准：</b>这行字会变吗？会变的是信息，不变的是解释。解释收起，信息留下。</div>
+
+<h3>气泡必须脱离容器</h3>
+<p>提示气泡用 <code>position: fixed</code> 自测位置并夹回视口内（左右留 8px，上方放不下翻到下方）。</p>
+<div class="why"><b>理由：</b>卡片带 <code>overflow: hidden</code>、内容区带 <code>overflow: auto</code>，绝对定位的气泡贴着容器边缘一定被裁掉半句话。半句解释比不给解释更糟。Tooltip、AnchoredPanel、DropdownMenu 都按同一做法。</div>
+
+<h2><span class="n">02</span>字号阶梯</h2>
+
+<div class="flow">
+<div class="step"><b>13–14px</b><div>正文上限：表格单元、卡片正文、消息气泡<em>13px 是常用档，14px 留给会话正文与切换器主行。</em></div></div>
+<div class="step"><b>12px</b><div>出现次数最多的一档：表头、筛选、标签、说明文字<em>界面上最常见的字号不是正文。</em></div></div>
+<div class="step"><b>11px</b><div>次级信息：ID、时间、副行、计数<em>一定是可以不读的东西才降到这一档。</em></div></div>
+<div class="step"><b>18–20px</b><div>指标数值与页面标题<em>大字只给需要被扫读的数字，和每页唯一的标题。</em></div></div>
+</div>
+
+<div class="why"><b>一个例外：</b>会话里的建议标签用 15px，比正文大一档。那里是空会话的起点，标签是唯一的内容，字小了整块区域显得没准备好。密度原则服务于可读性，不是反过来。</div>
+
+<h2><span class="n">03</span>省略、不换行</h2>
+
+<p>表格单元、切换器副行、指标格注解统一为单行 + 省略号，完整文本走 <code>title</code>。</p>
+<div class="why"><b>理由：</b>并排几格里只要一格折行，整排基线就参差了。<br>省略的方向要挑：账户 ID 从前面截（前缀相同，尾号才是区分位），文本从后面截。同格两段内容谁弹性谁定宽也要挑——「已用 73% · 日预算 ¥8,000」被截断时，丢掉的应该是别处已有的预算数字。</div>
+
+<h2><span class="n">04</span>留白的位置</h2>
+
+<p>密度不等于处处塞满。留白集中给三处：</p>
+<ul>
+<li><b>会话底部半屏</b>——最后一行贴着输入框会被读成「还没写完」。</li>
+<li><b>轮次之间</b>——比轮内多一档，长会话才有可扫读的节奏。</li>
+<li><b>卡片之间</b>——内部收紧，边界保持距离。密度做在内部，呼吸留在边界。</li>
+</ul>
+<div class="why"><b>反过来的地方：</b>指标卡内边距、汇总卡列间距、建议标签高度都是主动收紧的。这些元素重复出现几十次，每处多 4px，一屏就少一行数据。</div>
+
+<h2><span class="n">05</span>按需出现的控件</h2>
+
+<p>滚动条在鼠标进入区域时出现、离开隐藏、悬停加粗；行内次级操作与编辑图标悬停才显现。</p>
+<div class="why"><b>理由：</b>这些都是操作时才需要的控件，常驻会在版面上留下与内容无关的线条与色块。共同约束是占位固定——出现与消失不能改变布局，否则鼠标移动会让界面抖。</div>
+
+<h2><span class="n">06</span>专有名词</h2>
+<div class="terms">
+<div><span>InfoHint</span><span>说明文字的收纳位：问号 + 悬停气泡，fixed 定位并夹回视口</span></div>
+<div><span>CardTitle</span><span>卡片标题 + 问号，把说明从 subtitle 迁出</span></div>
+<div><span>subtitle / info</span><span>前者留给随数据变的一行，后者是解释</span></div>
+<div><span>--fs-11 ~ --fs-14</span><span>正文与次级信息的字号档位</span></div>
+<div><span>固定占位</span><span>悬停控件预留高度，出现与消失不改变布局</span></div>
+</div>
+
+<footer>HUITOU AI 设计系统 · 交互设计思维记录</footer>
+</doc-page>
+<script src="../doc-page.js"></script>
+</body></html>

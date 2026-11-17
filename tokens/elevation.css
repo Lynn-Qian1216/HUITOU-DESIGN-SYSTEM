@@ -1,0 +1,14 @@
+:root{
+/* Borders carry hierarchy; shadows are near-invisible by design. */
+--shadow-none:none;
+--shadow-xs:0 1px 2px rgba(16,20,24,.04);
+--shadow-sm:0 1px 2px rgba(16,20,24,.05), 0 1px 1px rgba(16,20,24,.03);
+--shadow-md:0 4px 12px rgba(16,20,24,.06), 0 1px 2px rgba(16,20,24,.04);
+--shadow-lg:0 12px 32px rgba(16,20,24,.08), 0 2px 6px rgba(16,20,24,.04);
+--shadow-overlay:0 24px 64px rgba(16,20,24,.14), 0 2px 8px rgba(16,20,24,.06);
+/* 聚焦：不加环、不改描边，光标本身就是反馈。仅在必要处用极淡光晕。 */
+--ring-focus:none;/* @kind shadow */
+--ring-focus-danger:none;/* @kind shadow */
+--inset-hairline:inset 0 0 0 1px var(--border-subtle);
+--blur-scrim:saturate(140%) blur(12px);/* @kind other */
+}

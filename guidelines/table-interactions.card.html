@@ -1,0 +1,72 @@
+<!-- @dsCard group="交互设计思维记录" viewport="1000x1400" name="表格与列表" subtitle="冻结列、遮挡渐变、行内追问、单行密度 —— 几十列宽表的可读性决策" -->
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>表格与列表交互设计笔记</title>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="note.css">
+</head>
+<body>
+<doc-page margin="0.85in">
+<h1>表格与列表</h1>
+<p class="sub">HUITOU AI 控制台 · 广告投放 / 素材 / 商品 / 账户列表 · 交互决策与理由</p>
+<div class="rule"></div>
+
+<p>投放列表是密度最高的地方：二十来列指标、几百行，且是横向滚动着读的。核心问题不是「怎么把数据放进去」，而是「滚到第八列时，人还知道在看哪一行吗」。</p>
+
+<h2><span class="n">01</span>横向滚动下的定位</h2>
+
+<h3>双侧冻结列（TableFrame）</h3>
+<p>左侧冻结勾选框、开关与名称，右侧冻结操作列，中间指标区横向滚动。</p>
+<div class="why"><b>理由：</b>宽表两端各有一件事必须常在：左端答「这是哪一行」，右端答「能做什么」。只冻结左侧会让人滚到最右操作、再滚回来确认改的是哪条——一次操作两趟滚动。</div>
+
+<h3>遮挡用渐变，不用阴影</h3>
+<p>冻结列与滚动区交界处用渐变覆盖层表示这侧还有内容，滚到端点时对应侧淡出。</p>
+<div class="why"><b>理由：</b>阴影落在单元格上会给每行加一道暗边，行的分界线变成两条。渐变画在整块滚动区上方，与行数无关，同时充当横向位置提示——横向滚动条在宽表里离视线太远。</div>
+
+<h3>数字右对齐 + 等宽数字</h3>
+<p>指标列全部右对齐并统一 <code>tabular-nums</code>。</p>
+<div class="why"><b>理由：</b>竖着比量级是读投放表的主要动作。比例字宽下「¥1,411」与「¥11,411」的个位不在同一竖线上，量级差异就得逐字读。</div>
+
+<h2><span class="n">02</span>行的可操作性</h2>
+
+<h3>行内追问（AskButton）</h3>
+<p>每个对象名后挂追问按钮，点击把该对象作为 @ 引用带进会话输入框。</p>
+<div class="why"><b>理由：</b>这是控制台与会话区的主要缝合点——表格负责发现，会话负责追问，中间不需要人搬运对象名。</div>
+
+<h3>悬停才出现的次级操作</h3>
+<p>编辑、更多菜单在行悬停时显现，占位固定。</p>
+<div class="why"><b>理由：</b>常驻会让每行右侧挂一排灰按钮，几百行叠起来是一片噪音。固定占位是代价：高度随悬停变化会让整张表抖动。</div>
+
+<h3>就地编辑（账号标签）</h3>
+<p>点一下变输入框，回车或失焦保存，Esc 取消，空值显示「添加标签」，铅笔只在悬停时出现。</p>
+<div class="why"><b>理由：</b>起个自己看得懂的名字是高频低风险动作，为它开弹窗不划算。<br>一个坑：输入框顶掉按钮时不触发 <code>mouseleave</code>，悬停态会卡住，铅笔在编辑结束后一直留着。退出编辑必须显式清掉。</div>
+
+<h2><span class="n">03</span>密度与节奏</h2>
+
+<div class="flow">
+<div class="step"><b>行高</b><div>单行，不换行<em>名称、标签、来源都用省略号截断，完整文本走 title。一行折成两行，整张表的行高就参差了。</em></div></div>
+<div class="step"><b>字号</b><div>正文 12–13px，次级 11px<em>13px 是这套界面的正文上限。默认 14–16px 会让一屏少放三到四行。</em></div></div>
+<div class="step"><b>列宽</b><div>名称列弹性并封顶，指标列定宽<em>名称是唯一长度不可控的字段，让它吃掉富余宽度；指标列定宽才能让相邻行的数字对齐。</em></div></div>
+<div class="step"><b>汇总卡</b><div>宽屏四列，窄屏最少三列<em>降到两列时卡片会宽到数字与标签之间出现大片空白，反而更难扫读。</em></div></div>
+</div>
+
+<h3>筛选栏与表体同卡</h3>
+<p>搜索、筛选与主操作在表格上方同一张卡里（FilterBar，<code>inset</code> 形态）。</p>
+<div class="why"><b>理由：</b>筛选与筛选结果是同一件事的两半，分成两张卡会在中间插入一道与内容无关的分界。</div>
+
+<h3>空状态区分成因</h3>
+<p>「没有匹配的产出」与「这个平台还没有接入账户」用不同文案与图标。</p>
+<div class="why"><b>理由：</b>筛没筛出来和本来就没有，后续动作不同——一个放宽条件，一个去接入。一句「暂无数据」会把人推向错误的下一步。</div>
+
+<h2><span class="n">04</span>专有名词</h2>
+<div class="terms">
+<div><span>TableFrame</span><span>宽表容器：双侧冻结列、遮挡渐变、横向滚动</span></div>
+<div><span>遮挡渐变</span><span>冻结列与滚动区交界的渐变层，随滚动位置淡入淡出</span></div>
+<div><span>FilterBar</span><span>表格上方的筛选行，inset 形态与表体同卡</span></div>
+<div><span>AskButton</span><span>对象名后的行内追问按钮</span></div>
+<div><span>tabular-nums</span><span>等宽数字，让相邻行的位数对齐</span></div>
+<div><span>StickyFooter</span><span>批量选择后浮出的操作条</span></div>
+</div>
+
+<footer>HUITOU AI 设计系统 · 交互设计思维记录</footer>
+</doc-page>
+<script src="../doc-page.js"></script>
+</body></html>

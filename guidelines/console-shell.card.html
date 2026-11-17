@@ -1,0 +1,36 @@
+<!-- @dsCard group="控制台" viewport="700x290" name="应用外壳" subtitle="56px 顶栏 · 264px 会话侧栏 · 可拖动分隔条 · 64px 图标栏 · 20px 左上圆角" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>html,body{margin:0}body{background:var(--surface-page);width:700px;height:290px;overflow:hidden;padding:16px;font-family:var(--font-sans)}
+.shell{display:flex;flex-direction:column;height:100%}
+.top{height:40px;flex:none;display:flex;align-items:center;gap:12px;padding:0 10px;font-size:11px;color:var(--text-tertiary)}
+.pill{display:flex;gap:2px;padding:2px;background:var(--neutral-200);border-radius:999px}
+.pill span{padding:2px 10px;border-radius:999px;font-size:11px;color:var(--text-secondary)}
+.pill span.on{background:var(--neutral-0);color:var(--text-primary);font-weight:500}
+.row{flex:1;min-height:0;display:flex}
+.gutter{width:9px;flex:none}
+.surface{flex:1;min-width:0;display:flex;background:var(--neutral-0);border:1px solid var(--border-subtle);border-bottom:0;border-top-left-radius:var(--radius-2xl);border-top-right-radius:var(--radius-2xl);overflow:hidden}
+.side{width:132px;flex:none;background:var(--surface-page);display:flex;flex-direction:column;justify-content:space-between;padding:10px 8px}
+.chat{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:10px}
+.split{width:7px;flex:none;display:flex;align-items:center;justify-content:center}
+.split i{width:3px;height:100%;background:var(--border-subtle)}
+.pane{flex:1;min-width:0;border-left:1px solid var(--border-subtle);padding:10px}
+.rail{width:48px;flex:none;border-left:1px solid var(--border-subtle);display:flex;flex-direction:column;align-items:center;gap:6px;padding:8px 0}
+.rail i{width:34px;height:26px;border-radius:var(--radius-sm);background:var(--neutral-100)}
+.rail i.on{background:var(--surface-active)}
+.blk{background:var(--neutral-100);border-radius:var(--radius-xs)}
+.cap{font-size:10px;color:var(--text-tertiary);font-family:var(--font-mono)}
+</style></head>
+<body><div class="shell">
+<div class="top"><b style="font-size:12px;color:var(--text-primary)">HUITOU</b><div class="pill"><span class="on">工作台</span><span>广告投放</span></div><span style="flex:1"></span><span class="cap">56px</span></div>
+<div class="row">
+<div class="gutter"></div>
+<div class="surface">
+<div class="side"><div><div class="blk" style="height:30px;margin-bottom:8px"></div><div class="blk" style="height:14px;width:70%;margin-bottom:5px"></div><div class="blk" style="height:14px;width:85%;margin-bottom:5px"></div><div class="blk" style="height:14px;width:60%"></div></div><div><div class="cap">264px</div><div class="blk" style="height:22px;margin-top:5px"></div></div></div>
+<div class="chat"><div><div class="blk" style="height:12px;width:80%;margin-bottom:6px"></div><div class="blk" style="height:12px;width:55%"></div></div><div><div class="cap">会话区 · 可拖动</div><div class="blk" style="height:34px;border-radius:var(--radius-xl);margin-top:5px"></div></div></div>
+<div class="split"><i></i></div>
+<div class="pane"><div class="cap" style="margin-bottom:6px">数据面板 22–72%</div><div class="blk" style="height:44px;margin-bottom:6px"></div><div class="blk" style="height:12px;width:75%"></div></div>
+<div class="rail"><i class="on"></i><i></i><i></i><i></i><div class="cap" style="margin-top:auto">64px</div></div>
+</div>
+<div class="gutter"></div>
+</div>
+</div></body></html>

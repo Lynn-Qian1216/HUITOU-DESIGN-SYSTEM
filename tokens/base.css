@@ -1,0 +1,30 @@
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--surface-page);color:var(--text-primary);font-family:var(--font-sans);font-size:var(--type-body-size);line-height:var(--type-body-lh);letter-spacing:var(--ls-normal);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+a{color:var(--text-link);text-decoration:none}
+a:hover{color:var(--text-link-hover);text-decoration:underline;text-underline-offset:2px}
+::selection{background:var(--neutral-900);color:var(--neutral-0)}
+:focus-visible{outline:none}
+textarea,input,select{caret-color:var(--neutral-900)}
+@keyframes huitou-spin{to{transform:rotate(360deg)}}
+@keyframes huitou-pulse{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes huitou-rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes huitou-fade{from{opacity:0}to{opacity:1}}
+/* 「问 AI」按钮：默认隐形，所在行／卡片悬停或键盘聚焦时才出现。常驻会把列表扫得很花，
+   但它要一直占位 —— 不占位的话，出现时会把整行的数字往旁边挤。 */
+.huitou-ask{opacity:0;transition:opacity var(--duration-fast,.12s) var(--ease-standard,ease)}
+tr:hover .huitou-ask,.huitou-ask-host:hover .huitou-ask,.huitou-ask:focus-visible{opacity:1}
+/* 滚动条：全局统一 —— 纵向与横向、任何滚动区都是 6px 胶囊滑块、透明轨道。
+   3px 透明边框 + background-clip 让滑块四角完整成胶囊；不要声明 scrollbar-width，
+   否则 Chrome 121+ 会切到标准滚动条渲染，下面这些规则全部失效。 */
+*::-webkit-scrollbar{width:12px;height:12px}
+*::-webkit-scrollbar-track{background:transparent}
+*::-webkit-scrollbar-thumb{background:var(--neutral-300);border-radius:999px;background-clip:padding-box;border:3px solid transparent}
+*::-webkit-scrollbar-thumb:hover{background:var(--neutral-400);background-clip:padding-box;border:2px solid transparent}
+*::-webkit-scrollbar-corner{background:transparent}
+/* 滚动条只在指针停留在该滚动区内时可见：宿主给容器加/去 .huitou-scroll-hidden
+   （纯 CSS 的 :hover 在滚动条自身与内容之间会抖，交给宿主按指针进出整块区域切换）。
+   只换滑块颜色、不动轨道宽度，内容不会左右跳。指针落到滑块上时加粗一档，便于抓取。 */
+.huitou-scroll-hidden::-webkit-scrollbar-thumb{background:transparent;border-color:transparent}
+*::-webkit-scrollbar-thumb{transition:background var(--duration-fast,.12s) var(--ease-standard,ease)}
+@supports not selector(::-webkit-scrollbar){.huitou-scroll-hidden{scrollbar-color:transparent transparent}}
+@supports not selector(::-webkit-scrollbar){*{scrollbar-width:thin;scrollbar-color:var(--neutral-300) transparent}}

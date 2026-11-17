@@ -1,0 +1,29 @@
+/* 交互设计思维记录的共用版式。笔记是读物不是界面：正文比控制台宽松，
+   理由块用左侧竖线与正文区分，专有名词表与流程表都禁止跨页断开。 */
+doc-page:not(:defined){visibility:hidden}
+body{background:var(--surface-page)}
+h1{margin:0;font-size:26px;font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight)}
+.sub{margin:6px 0 0;font-size:13px;color:var(--text-tertiary)}
+.rule{height:1px;background:var(--border-default);margin:18px 0 26px}
+h2{margin:30px 0 10px;font-size:16px;font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight);break-after:avoid}
+h2 .n{display:inline-block;width:22px;color:var(--text-tertiary);font-weight:var(--fw-regular);font-variant-numeric:tabular-nums}
+h3{margin:16px 0 6px;font-size:13px;font-weight:var(--fw-medium);color:var(--text-secondary);break-after:avoid}
+p{margin:0 0 9px;font-size:13.5px;line-height:1.72;color:var(--text-primary)}
+ul{margin:0 0 9px;padding-left:18px}
+li{font-size:13.5px;line-height:1.72;margin-bottom:4px}
+code{font-size:12.5px;padding:1px 4px;border-radius:3px;background:var(--neutral-100);color:var(--text-primary)}
+a{color:var(--blue-600)}
+a:hover{color:var(--blue-700)}
+.why{margin:0 0 9px;padding-left:12px;border-left:2px solid var(--border-default);font-size:13px;line-height:1.7;color:var(--text-secondary);break-inside:avoid}
+.why b{color:var(--text-primary);font-weight:var(--fw-medium)}
+.terms{break-inside:avoid;margin:0 0 9px;border-top:1px solid var(--border-subtle)}
+.terms div{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid var(--border-subtle);font-size:13px}
+.terms span:first-child{flex:0 0 176px;font-weight:var(--fw-medium)}
+.terms span:last-child{flex:1;color:var(--text-secondary)}
+.flow{break-inside:avoid;display:flex;flex-direction:column;margin:4px 0 12px}
+.step{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border-subtle)}
+.step:first-child{border-top:1px solid var(--border-subtle)}
+.step b{flex:0 0 84px;font-size:12px;font-weight:var(--fw-medium);color:var(--text-tertiary);letter-spacing:var(--ls-caps);padding-top:1px}
+.step div{flex:1;font-size:13px;line-height:1.65}
+.step em{display:block;font-style:normal;color:var(--text-tertiary);font-size:12.5px;margin-top:2px}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--border-default);font-size:12px;color:var(--text-tertiary)}

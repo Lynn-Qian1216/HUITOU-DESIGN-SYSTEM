@@ -1,0 +1,33 @@
+<!-- @dsCard group="组件" viewport="700x1090" name="反馈" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:1090px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { Alert, Toast, ProgressBar, Spinner, Skeleton, EmptyState, Button, AgentLoading, AgentInquiry } = window.HUITOUAIDesignSystem_52606d;
+
+function Demo(){return <div style={{display:'flex',flexDirection:'column',gap:14}}>
+<div><div className="lbl">智能体生成中</div>
+<AgentLoading phases={['正在读取账户数据','正在核对近 7 天指标','正在生成结论与建议']}/></div>
+<Alert tone="warning" title="Meta 授权将在 3 天后过期" action={<Button size="sm">重新连接</Button>} onDismiss={()=>{}}>授权过期后自动变更将暂停。</Alert>
+<div style={{display:'flex',gap:14,alignItems:'flex-start'}}>
+<Toast tone="success" title="策略已应用" description="已更新 4 个广告组" action={<Button variant="link" size="sm">撤销</Button>} onDismiss={()=>{}}/>
+<div style={{flex:1,display:'flex',flexDirection:'column',gap:12}}>
+<ProgressBar value={64} label="学习期进度" showValue/>
+<ProgressBar value={22} tone="warning" label="预算消耗节奏" showValue/>
+<Spinner label="正在分析账户"/>
+<Skeleton lines={3}/>
+</div></div>
+<div><div className="lbl">智能体询问卡</div>
+<AgentInquiry question="分析投放列表表现时，你希望我看哪个时间窗口和数据范围？"
+ questions={[{key:'window',label:'时间窗口',options:['昨天','近 3 天','近 7 天','近 14 天','近 30 天']},{key:'scope',label:'数据范围',options:['全部在投计划','消耗 Top 20 计划','指定广告组','指定单个计划']}]}
+ defaults={[{key:'window',label:'近 7 天'},{key:'scope',label:'全部在投计划'}]}
+ notePlaceholder="例如：只看藤椒味相关的计划" dispatchedAt="13:26" eta="预计 2 min"/></div>
+<div style={{border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)'}}>
+<EmptyState compact icon="search-x" title="没有符合筛选条件的广告系列" description="请清除筛选条件或扩大日期范围。" action={<Button size="sm">清除筛选</Button>}/>
+</div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

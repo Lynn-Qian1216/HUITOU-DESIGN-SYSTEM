@@ -1,0 +1,54 @@
+<!-- @dsCard group="组件" viewport="700x900" name="AI 决策" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--neutral-25);width:700px;height:900px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { DecisionCard, TrackingTable, MetricRounds, PriorityChip, ExpiryChip, MetaChip, ResultNote } = window.HUITOUAIDesignSystem_52606d;
+
+const M = (name,target,from,rounds)=>({name,target,from,rounds});
+const pending = {
+  type:'改日预算', status:'待执行', priority:'高', change:'1000元 → 1200元', delta:'+20%', editable:true,
+  impact:'+¥980 / 周', strategy:'转化成本超标预警', plan:'吃货小卤--脆笋去骨鸡爪--2026-0…', time:'13:18',
+  expiry:'今天 19:18 后失效', goal:'利用 CTR 高位窗口扩量获取更多优质转化，目标日转化量提升 20% 以上',
+  metrics:[M('日转化量','≥500','350',[null,null,null])],
+};
+const verifying = {
+  type:'改出价', status:'验证中', priority:'中', change:'出价 ¥32 → ¥36', delta:'+12%',
+  impact:'+¥210 / 周', strategy:'转化成本超标预警', plan:'线上消费贷', time:'13:30',
+  metrics:[M('ROI','≥3.5','2.5',[{v:'2.9'},{v:'3.6'},null]), M('CPA','≤¥30','¥38.50',[{v:'¥33.40'},{v:'¥28.60'},null])],
+};
+const failed = {
+  type:'素材筛选', status:'失败', priority:'中', change:'下线 3 条 · 保留 2 条',
+  impact:'未达成', strategy:'素材疲劳预警', plan:'线上消费贷', time:'11:06',
+  failNote:'保留素材同步进入疲劳期，CTR 未回升',
+  metrics:[M('CTR','≥3.2%','1.9%',[{v:'2.8%'},{v:'2.4%'},{v:'2.1%'}])],
+  result:'revert', resultText:'已回滚素材配置',
+};
+const declined = {
+  type:'调时段', status:'已拒绝', priority:'低', change:'关停 00:00–07:00',
+  impact:'+¥150 / 周', strategy:'时段效率优化', time:'10:22',
+  goal:'把夜间低效时段的预算挪到午间高转化窗口',
+  metrics:[M('夜间无效消耗','≤5%','18%',[null,null,null])],
+};
+
+function Demo(){return <div style={{display:'flex',flexDirection:'column',gap:16}}>
+<div><div className="lbl">决策卡 · 四种状态</div>
+<div style={{display:'flex',flexDirection:'column',gap:10}}>
+<DecisionCard decision={pending} onOpen={()=>{}} onAct={()=>{}}/>
+<DecisionCard decision={verifying} onOpen={()=>{}} onAct={()=>{}}/>
+<DecisionCard decision={failed} onOpen={()=>{}} onAct={()=>{}}/>
+<DecisionCard decision={declined} onOpen={()=>{}} onAct={()=>{}}/>
+</div></div>
+<div><div className="lbl">验证跟踪表 · 决策详情</div>
+<TrackingTable rounds={['一轮 19:00','二轮 21:00','三轮 23:00']}
+ metrics={[M('ROI','≥3.5','2.5',[{v:'2.9'},{v:'3.6',flag:true},null]), M('CPA','≤¥30','¥38.50',[{v:'¥33.40'},{v:'¥28.60'},null])]}/></div>
+<div><div className="lbl">定语标记</div>
+<div className="grp"><PriorityChip level="高"/><PriorityChip level="中"/><PriorityChip level="低"/>
+<ExpiryChip label="今天 19:18 后失效"/><MetaChip label="所属计划" value="吃货小卤--脆笋去骨鸡爪"/>
+<ResultNote result="success" text="达标，已保留"/><ResultNote result="revert" text="已回滚预算"/></div></div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

@@ -1,0 +1,30 @@
+<!-- @dsCard group="控制台" viewport="700x290" name="会话区宽度" subtitle="消息流 860px · 输入区 1080px · 用户气泡 78% · 均居中" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>html,body{margin:0}body{background:var(--surface-page);width:700px;height:290px;overflow:hidden;padding:16px;font-family:var(--font-sans)}
+.wrap{height:100%;background:var(--neutral-0);border:1px solid var(--border-subtle);border-radius:var(--radius-xl);padding:14px;display:flex;flex-direction:column;gap:10px;box-sizing:border-box}
+.scale{--k:0.62}
+.thread{width:calc(var(--layout-max-chat-thread) * var(--k));max-width:100%;margin:0 auto;display:flex;flex-direction:column;gap:6px;position:relative}
+.composer{width:calc(var(--layout-max-chat-composer) * var(--k));max-width:100%;margin:0 auto;position:relative}
+.blk{background:var(--neutral-100);border-radius:var(--radius-xs)}
+.bubble{align-self:flex-end;width:var(--layout-max-chat-bubble);height:26px;background:var(--neutral-100);border-radius:var(--radius-xl)}
+.bar{height:44px;border:1px solid var(--border-default);border-radius:var(--radius-xl);background:var(--neutral-0)}
+.cap{font-family:var(--font-mono);font-size:10px;color:var(--text-tertiary)}
+.rule{border-top:1px dashed var(--border-strong);position:relative;margin-top:4px}
+.rule span{position:absolute;top:-6px;left:50%;transform:translateX(-50%);background:var(--neutral-0);padding:0 6px}
+.tag{font-size:11px;color:var(--text-secondary)}
+</style></head>
+<body><div class="wrap scale">
+<div class="tag">消息流 <span class="cap">--layout-max-chat-thread 860px</span></div>
+<div class="thread">
+<div class="bubble"></div>
+<div class="blk" style="height:12px;width:92%"></div>
+<div class="blk" style="height:12px;width:74%"></div>
+<div class="rule"><span class="cap">860px</span></div>
+</div>
+<div class="tag" style="margin-top:auto">输入区 <span class="cap">--layout-max-chat-composer 1080px</span></div>
+<div class="composer">
+<div class="bar"></div>
+<div class="rule"><span class="cap">1080px</span></div>
+</div>
+<div class="cap">用户气泡 --layout-max-chat-bubble 78%（右对齐，随消息流宽度收缩）</div>
+</div></body></html>

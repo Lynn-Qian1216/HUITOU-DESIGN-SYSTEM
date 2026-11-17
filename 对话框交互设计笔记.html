@@ -1,0 +1,110 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8"><title>对话框交互设计笔记</title>
+<link rel="stylesheet" href="styles.css">
+<style>
+doc-page:not(:defined){visibility:hidden}
+body{background:var(--surface-page)}
+h1{margin:0;font-size:26px;font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight)}
+.sub{margin:6px 0 0;font-size:13px;color:var(--text-tertiary)}
+.rule{height:1px;background:var(--border-default);margin:18px 0 26px}
+h2{margin:30px 0 10px;font-size:16px;font-weight:var(--fw-semibold);letter-spacing:var(--ls-tight);break-after:avoid}
+h2 .n{display:inline-block;width:22px;color:var(--text-tertiary);font-weight:var(--fw-regular);font-variant-numeric:tabular-nums}
+h3{margin:16px 0 6px;font-size:13px;font-weight:var(--fw-medium);color:var(--text-secondary);break-after:avoid}
+p{margin:0 0 9px;font-size:13.5px;line-height:1.72;color:var(--text-primary)}
+ul{margin:0 0 9px;padding-left:18px}
+li{font-size:13.5px;line-height:1.72;margin-bottom:4px}
+code{font-size:12.5px;padding:1px 4px;border-radius:3px;background:var(--neutral-100);color:var(--text-primary)}
+.why{margin:0 0 9px;padding-left:12px;border-left:2px solid var(--border-default);font-size:13px;line-height:1.7;color:var(--text-secondary);break-inside:avoid}
+.why b{color:var(--text-primary);font-weight:var(--fw-medium)}
+.terms{break-inside:avoid;margin:0 0 9px;border-top:1px solid var(--border-subtle)}
+.terms div{display:flex;gap:14px;padding:7px 0;border-bottom:1px solid var(--border-subtle);font-size:13px}
+.terms span:first-child{flex:0 0 176px;font-weight:var(--fw-medium)}
+.terms span:last-child{flex:1;color:var(--text-secondary)}
+.flow{break-inside:avoid;display:flex;flex-direction:column;gap:0;margin:4px 0 12px}
+.step{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--border-subtle)}
+.step:first-child{border-top:1px solid var(--border-subtle)}
+.step b{flex:0 0 84px;font-size:12px;font-weight:var(--fw-medium);color:var(--text-tertiary);letter-spacing:var(--ls-caps);padding-top:1px}
+.step div{flex:1;font-size:13px;line-height:1.65}
+.step em{display:block;font-style:normal;color:var(--text-tertiary);font-size:12.5px;margin-top:2px}
+footer{margin-top:34px;padding-top:12px;border-top:1px solid var(--border-default);font-size:12px;color:var(--text-tertiary)}
+</style></head>
+<body>
+<doc-page margin="0.85in">
+<h1>对话框交互设计笔记</h1>
+<p class="sub">HUITOU AI 控制台 · 会话区（ChatScreen）· 交互决策与理由</p>
+<div class="rule"></div>
+
+<p>会话是这个产品的主界面，不是附属的客服窗口——投手一天里大部分动作都从这里发起。所以对话框承担了三件事：提问要能精确指向某条广告或某个素材；等待过程要交代清楚 AI 在做什么；已经发生的事要留得住、回得去。下面按这三件事记录做过的交互设计。</p>
+
+<h2><span class="n">01</span>提问的精确性</h2>
+
+<h3>@ 引用（MentionChip）</h3>
+<p>输入框里用 <code>@</code> 唤出引用面板，可以挂上智能体、广告、商品、素材、达人、账户六类对象。胶囊分左右两段——左边类型、右边名字，因为「藤椒味」既可能是商品也可能是素材。六类各有自己的字形，但只有智能体着色（紫）：一排胶囊里五种颜色等于没有颜色。引用停在输入框上方，发送时随消息一起进入气泡，留在这条提问的正文上方。</p>
+<div class="why"><b>理由：</b>「这条计划为什么起不了量」这句话本身没有主语。如果引用只是把文字塞进输入框，历史记录里就只剩一句无主语的问话，回看时无法判断当时指的是哪一条。让引用成为消息的一部分，是让对话具备可追溯性的最小代价。</div>
+
+<h3>行内追问（AskButton）</h3>
+<p>表格与卡片里的每个对象名后面都有一个追问按钮，点一下把该对象作为引用带进输入框。</p>
+<div class="why"><b>理由：</b>发现问题的地方和提问的地方应该是同一处。让人先记住计划名、再滚回会话区手打，是把系统的检索工作转移给了用户。</div>
+
+<h3>常用指令（PromptBar）</h3>
+<p>输入框上方一行固定三条高频问法，点一下填进输入框而不是直接发送。</p>
+<div class="why"><b>理由：</b>填入而非发送，留下了改一改再问的余地——大部分复用的问法都需要小幅调整。数量控制在三条：这一行是快捷方式，不是功能目录，多了就要读，读就失去了快捷的意义。</div>
+
+<h3>排队提问（PromptQueue）</h3>
+<p>上一条还在生成时继续输入，新的提问落进队列，前一条收口后依次发出。每条排队消息各自携带当时的引用。</p>
+<div class="why"><b>理由：</b>生成期间禁用输入框，等于要求人的思路配合系统的节奏。想到就打，是更符合实际使用的假设。</div>
+
+<h2><span class="n">02</span>等待的可读性</h2>
+
+<p>这是这次改动最大的一块。生成过程原来是一个不动的加载动画，现在拆成四段，每一段回答一个不同的问题。</p>
+
+<div class="flow">
+<div class="step"><b>开始</b><div>全屏逐帧奔跑猫（AgentLoading）+ 方块骨架屏<em>回答「收到了吗」。此刻还没有进度可报，所以不显示计时——一个从 0 开始跳的秒表只会让等待显得更长。</em></div></div>
+<div class="step"><b>首块落地</b><div>回复顶部出现「正在回复 12 秒」，蓝点脉冲，秒数实时走<em>回答「还要多久」。计时器等到第一块内容出现才启动，因为那一刻起「已经用了多久」才是有参照的信息。</em></div></div>
+<div class="step"><b>生成中</b><div>猫跟在已出内容的尾部，文案换成当前这一步的实际工作：「报表管家 读取投放数据」「优化专家 校验护栏并生成方案」<em>回答「它在干什么」。文案按内容块的类型映射到具体 AI 成员与动作，不是三句话空转——一段轮播的假进度文案，看两遍就会被识破。</em></div></div>
+<div class="step"><b>收口</b><div>顶部变为「用时 1 分 04 秒」+ 右箭头，点开展开工作明细（成员 / 做了什么 / 累计用时）<em>回答「这个结论是怎么来的」。过程默认收起、需要时展开：多数时候只看结论，但复盘和追责时，中间步骤是唯一的依据。</em></div></div>
+</div>
+
+<div class="why"><b>贯穿的一个判断：</b>等待不是需要被掩盖的空白，而是唯一能展示 AI 在做什么的窗口。把等待时间用来交代工作内容，比用一个转圈图标遮住它，更能建立对结论的信任。这也是为什么过程记录在生成结束后没有被丢弃，而是折叠保留。</div>
+
+<h3>骨架屏只出现一次</h3>
+<p>首块内容之前给方块骨架，之后的追加占位只有猫，不再重复骨架。</p>
+<div class="why"><b>理由：</b>骨架屏的作用是预告版式。版式已经出现之后再画一遍骨架，就变成了内容会被替换掉的错误暗示。</div>
+
+<h2><span class="n">03</span>已发生的事</h2>
+
+<h3>消息悬停操作</h3>
+<p>发出的消息悬停时，右下出现复制与编辑重发。复制包含引用；编辑重发把原文和当时的引用一起回填到输入框。操作条占固定高度，出现与消失不推动布局。</p>
+<div class="why"><b>理由：</b>操作常驻会让每条消息下面都挂一行灰按钮，把对话读成表单。固定占位是必要的代价——高度随悬停变化会让整个会话在鼠标移动时跳动。</div>
+
+<h3>底部留白</h3>
+<p>生成期间在末尾插入近满屏的占位，让本轮问答顶到视口上沿；生成结束后仍保留半屏留白。</p>
+<div class="why"><b>理由：</b>生成时的占位是为了让新内容向下填进空白，而不是把整个历史往上推。结束后保留半屏，是因为最后一行贴着输入框会被读成「还没写完」。</div>
+
+<h3>轮次边界</h3>
+<p>新一轮提问上方比轮内的问答间距多一档。</p>
+<div class="why"><b>理由：</b>一问一答是一个语义单元。轮内与轮间用同样的间距，长会话就失去了可扫读的节奏。</div>
+
+<h3>按需出现的滚动条</h3>
+<p>鼠标进入会话区时滚动条出现，离开隐藏，悬停在滚动条上加粗。</p>
+<div class="why"><b>理由：</b>滚动条是操作时才需要的控件。常驻会在版面右侧留下一条与内容无关的竖线，尤其在对话这种以文本为主的界面里显眼。</div>
+
+<h2><span class="n">04</span>说明文字的处置</h2>
+<p>控制台里所有解释性副文都收进标题旁的问号（InfoHint），悬停展开。随数据变化的副文——倒计时、计费周期、简报排期、数据时效——仍然常驻。空状态的说明也保留。</p>
+<div class="why"><b>理由：</b>解释只在第一次有用，第二次起就是噪音；而随数据变化的那一行不是解释，是信息。空状态里的说明本身就是这块区域的全部内容，收起来就什么都不剩了。<br>气泡用 <code>position: fixed</code> 自己量位置并夹回视口内——卡片带 <code>overflow: hidden</code>、内容区带 <code>overflow: auto</code>，绝对定位的气泡贴着容器边缘会被裁掉半句话，半句解释比不给解释更糟。</div>
+
+<h2><span class="n">05</span>专有名词</h2>
+<div class="terms">
+<div><span>AgentLoading</span><span>逐帧奔跑猫 + 状态文案 + 方块骨架的加载占位</span></div>
+<div><span>ReplyStatus</span><span>回复顶部的一行：生成中计时，收口后用时 + 可展开的工作明细</span></div>
+<div><span>MentionChip</span><span>@ 引用胶囊，左段类型右段名字；六类各有字形，只有智能体着色</span></div>
+<div><span>AskButton</span><span>对象名后的行内追问按钮，把该对象带进输入框</span></div>
+<div><span>PromptBar</span><span>输入框上方的常用指令行，点击填入</span></div>
+<div><span>PromptQueue</span><span>生成期间继续输入形成的待发队列</span></div>
+<div><span>InfoHint</span><span>说明文字的收纳位，问号 + 悬停气泡</span></div>
+<div><span>FileChip / FileCard</span><span>附件的两档形态：行内胶囊与带缩略图的卡片</span></div>
+</div>
+
+<footer>HUITOU AI 设计系统 · 会话区交互记录</footer>
+</doc-page>
+<script src="doc-page.js"></script>
+</body></html>

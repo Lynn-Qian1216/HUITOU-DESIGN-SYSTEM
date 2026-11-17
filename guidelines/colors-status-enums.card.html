@@ -1,0 +1,36 @@
+<!-- @dsCard group="颜色" viewport="700x230" name="业务状态枚举" subtitle="决策 · 达人分销 · 授权 · 健康度 —— 同一状态在任何界面用同一色调" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../styles.css">
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:230px;overflow:hidden;padding:20px;font-family:var(--font-sans);display:flex;flex-direction:column;gap:14px}
+.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.h{flex:0 0 88px;font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);white-space:nowrap}
+.b{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:500;border-width:1px;border-style:solid;white-space:nowrap}
+.d{width:6px;height:6px;border-radius:999px;background:currentColor}
+</style></head>
+<body>
+<div class="grp"><span class="h">决策</span>
+<span class="b" style="background:var(--status-warning-bg);color:var(--status-warning-fg);border-color:var(--status-warning-border)"><i class="d"></i>待执行</span>
+<span class="b" style="background:var(--status-success-bg);color:var(--status-success-fg);border-color:var(--status-success-border)"><i class="d"></i>验证中</span>
+<span class="b" style="background:var(--status-success-bg);color:var(--status-success-fg);border-color:var(--status-success-border)"><i class="d"></i>已执行</span>
+<span class="b" style="background:var(--status-neutral-bg);color:var(--status-neutral-fg);border-color:var(--status-neutral-border)"><i class="d"></i>已拒绝</span>
+<span class="b" style="background:var(--status-neutral-bg);color:var(--status-neutral-fg);border-color:var(--status-neutral-border)"><i class="d"></i>已失效</span>
+</div>
+<div class="grp"><span class="h">达人分销</span>
+<span class="b" style="background:var(--status-success-bg);color:var(--status-success-fg);border-color:var(--status-success-border)">完成</span>
+<span class="b" style="background:var(--status-danger-bg);color:var(--status-danger-fg);border-color:var(--status-danger-border)">失败</span>
+<span class="b" style="background:var(--status-warning-bg);color:var(--status-warning-fg);border-color:var(--status-warning-border)">暂停</span>
+<span class="b" style="background:var(--status-info-bg);color:var(--status-info-fg);border-color:var(--status-info-border)">进行中</span>
+<span class="b" style="background:var(--surface-card);color:var(--text-tertiary);border-color:var(--border-subtle)">未开始</span>
+</div>
+<div class="grp"><span class="h">授权</span>
+<span class="b" style="background:var(--status-success-bg);color:var(--status-success-fg);border-color:var(--status-success-border)">授权生效</span>
+<span class="b" style="background:var(--status-warning-bg);color:var(--status-warning-fg);border-color:var(--status-warning-border)">待达人确认</span>
+<span class="b" style="background:var(--status-danger-bg);color:var(--status-danger-fg);border-color:var(--status-danger-border)">授权失败</span>
+<span class="b" style="background:var(--status-neutral-bg);color:var(--status-neutral-fg);border-color:var(--status-neutral-border)">未申请</span>
+</div>
+<div class="grp"><span class="h">健康度</span>
+<span class="b" style="background:var(--status-success-bg);color:var(--status-success-fg);border-color:var(--status-success-border)">优秀 ≥90</span>
+<span class="b" style="background:var(--status-warning-bg);color:var(--status-warning-fg);border-color:var(--status-warning-border)">良好 ≥75</span>
+<span class="b" style="background:var(--status-neutral-bg);color:var(--status-neutral-fg);border-color:var(--status-neutral-border)">合格 &lt;75</span>
+<span class="b" style="background:var(--status-ai-bg);color:var(--status-ai-fg);border-color:var(--status-ai-border)">体检中</span>
+</div>
+</body></html>

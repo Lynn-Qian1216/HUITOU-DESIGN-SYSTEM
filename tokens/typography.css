@@ -1,0 +1,38 @@
+:root{
+--font-sans:"Geist","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;
+/* 全站统一思源黑体。--font-mono 仍保留为 token 名（大量组件在用），
+   但它不再指向等宽字体 —— 数字列的对齐交给 font-variant-numeric: tabular-nums。 */
+--font-mono:"Geist","Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,sans-serif;
+--font-cjk:"Noto Sans SC","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+--font-display:"Noto Serif SC","Source Han Serif SC","Songti SC",Georgia,serif;
+
+--fw-light:300;/* @kind font */
+--fw-regular:400;/* @kind font */
+--fw-medium:500;/* @kind font */
+--fw-semibold:600;/* @kind font */
+--fw-bold:700;/* @kind font */
+
+/* Sizes — 12 → 56, tight at the top end */
+--fs-11:11px;--fs-12:12px;--fs-13:13px;--fs-14:14px;--fs-16:16px;--fs-18:18px;
+--fs-20:20px;--fs-24:24px;--fs-30:30px;--fs-38:38px;--fs-48:48px;--fs-56:56px;
+
+--lh-tight:1.1;/* @kind font */
+--lh-snug:1.25;/* @kind font */
+--lh-normal:1.65;/* @kind font */
+--lh-relaxed:1.6;/* @kind font */
+--ls-tighter:-0.03em;--ls-tight:-0.018em;--ls-normal:0em;--ls-wide:0.02em;--ls-caps:0.08em;
+
+/* Semantic roles */
+--type-display-family:var(--font-display);--type-display-size:var(--fs-56);--type-display-weight:900;/* @kind font */--type-display-lh:1.18;/* @kind font */--type-display-ls:var(--ls-tight);
+--type-h1-family:var(--font-display);--type-h1-size:var(--fs-38);--type-h1-weight:900;/* @kind font */--type-h1-lh:var(--lh-snug);--type-h1-ls:var(--ls-tight);
+--type-h2-size:var(--fs-30);--type-h2-weight:var(--fw-medium);/* @kind font */--type-h2-lh:var(--lh-snug);--type-h2-ls:var(--ls-tight);
+--type-h3-size:var(--fs-20);--type-h3-weight:var(--fw-medium);/* @kind font */--type-h3-lh:var(--lh-snug);--type-h3-ls:var(--ls-normal);
+--type-h4-size:var(--fs-16);--type-h4-weight:var(--fw-semibold);/* @kind font */--type-h4-lh:var(--lh-snug);--type-h4-ls:var(--ls-normal);
+--type-body-size:var(--fs-14);--type-body-weight:var(--fw-regular);/* @kind font */--type-body-lh:var(--lh-normal);
+--type-body-lg-size:var(--fs-16);
+--type-label-size:var(--fs-13);--type-label-weight:var(--fw-medium);/* @kind font */
+--type-caption-size:var(--fs-12);--type-caption-weight:var(--fw-regular);/* @kind font */
+--type-overline-size:var(--fs-11);--type-overline-weight:var(--fw-medium);/* @kind font */--type-overline-ls:var(--ls-caps);
+--type-metric-size:var(--fs-30);--type-metric-weight:var(--fw-medium);/* @kind font */--type-metric-ls:var(--ls-tight);
+--type-code-size:var(--fs-13);
+}

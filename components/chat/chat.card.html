@@ -1,0 +1,32 @@
+<!-- @dsCard group="组件" viewport="700x420" name="提问队列" subtitle="生成期间继续发送 · 输入框上方排队" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--neutral-25);width:700px;height:420px;overflow:hidden;padding:20px;font-family:var(--font-sans)}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.bar{display:flex;align-items:center;gap:8px;border:1px solid var(--border-default);border-radius:var(--radius-xl);padding:10px 12px;background:var(--neutral-0);margin-top:8px;font-size:13px;color:var(--text-tertiary)}.dot{margin-left:auto;display:inline-grid;place-items:center;width:30px;height:30px;border-radius:var(--radius-pill);background:var(--neutral-100);color:var(--text-secondary)}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { PromptQueue, Icon } = window.HUITOUAIDesignSystem_52606d;
+
+const seed = [
+  { id: 1, body: '把昨天 ROI 低于 2 的计划都列出来，按消耗排序', mentions: [{ kind: 'agent', label: '投放优化助手' }, { kind: 'product', label: '虎皮凤爪 100g' }] },
+  { id: 2, body: '这条素材的完播率为什么掉了？给出可执行的调整建议，并说明预计影响范围', mentions: [{ kind: 'creative', label: '厨房实拍-A3' }] },
+  { id: 3, body: '生成本周达人合作复盘' },
+  { id: 4, body: '同步一份预算调整清单到飞书' },
+];
+
+function Demo() {
+  const [items, setItems] = React.useState(seed);
+  const remove = (it) => setItems((l) => l.filter((x) => x.id !== it.id));
+  const promote = (it) => setItems((l) => [it].concat(l.filter((x) => x.id !== it.id)));
+  return (
+    <div>
+      <div className="lbl">生成中 · 队列</div>
+      <PromptQueue items={items} onRemove={remove} onPromote={promote} onEdit={remove}
+        onClear={() => setItems([])} />
+      <div className="bar">向 HUITOU 提问…<span className="dot"><Icon name="list-plus" size={16} /></span></div>
+    </div>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

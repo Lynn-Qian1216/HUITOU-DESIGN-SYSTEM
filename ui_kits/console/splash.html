@@ -1,0 +1,16 @@
+<!-- @dsCard group="控制台" viewport="700x400" name="全屏加载动效" subtitle="设计稿导出的 13 帧 morph 逐帧播放" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>全屏加载动效</title><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body,#root{height:100%;margin:0}</style></head>
+<body><div id="root"></div>
+<script type="text/babel" src="SplashScreen.jsx"></script>
+<script type="text/babel" data-presets="react">
+function Demo(){
+  const [n,setN]=React.useState(0);
+  return <React.Fragment key={n}><SplashScreen duration={100000} onDone={()=>setN(n+1)}/></React.Fragment>;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo/>);
+</script></body></html>

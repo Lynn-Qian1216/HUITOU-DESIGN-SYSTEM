@@ -1,0 +1,27 @@
+node_modules/
+npm-debug.log*
+dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+
+# Historical Figma captures and temporary conversion scripts
+/figma-*
+/prepare-figma-*
+/fix-figma-*
+/update-figma-*
+/ui_kits/console/_figma/
+/ui_kits/console/figma-*
+/ui_kits/console/standalone.html
+/ui_kits/console/MatrixScreen v1.jsx
+/HUITOU 控制台.html
+/uploads/
+/scraps/
+/.thumbnail
+/_thumbnail.*
+/Canvas.dc.html
+/support.js
+/scripts/redesign-auth.cjs

@@ -1,0 +1,50 @@
+<!-- @dsCard group="组件" viewport="700x660" name="数据" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:660px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { MetricCard, DataTable, StatDelta, Sparkline, StatusDot, AgentTimeline, Badge, TableFrame, StickyFooter, Pagination, RoundsProgress, TableRowHover } = window.HUITOUAIDesignSystem_52606d;
+
+function Demo(){return <div style={{display:'flex',flexDirection:'column',gap:14}}>
+<div style={{display:'grid',gridTemplateColumns:'repeat(3,1fr)',gap:12}}>
+<MetricCard label="混合 CPA" value="¥41.20" delta={-18.4} goodWhen="down" basis="较前 7 天" series={[52,49,51,47,45,44,41]} target="¥45.00"/>
+<MetricCard label="花费 · 7 天" value="¥28,412" delta={4.1} goodWhen="none" basis="较前 7 天" series={[18,21,19,24,26,25,28]}/>
+<MetricCard label="ROAS" value="3.14" delta={12.4} basis="较前 7 天" series={[2.1,2.4,2.3,2.7,2.9,3.0,3.14]}/>
+</div>
+<div style={{display:'flex',gap:14}}>
+<div style={{flex:1.35,border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)',overflow:'hidden'}}>
+<DataTable dense selectable selected={['b']} onToggleRow={()=>{}}
+ columns={[{key:'name',header:'广告系列'},{key:'status',header:'状态',render:r=><StatusDot tone={r.tone} label={r.status}/>},{key:'spend',header:'花费',align:'right',mono:true},{key:'d',header:'CPA',align:'right',render:r=><StatDelta value={r.d} goodWhen="down"/>}]}
+ rows={[{id:'a',name:'拉新 — 美国',status:'投放中',tone:'success',spend:'¥12,480',d:-18.4},{id:'b',name:'再营销 — DTC',status:'已标记',tone:'warning',spend:'¥1,110',d:22.1},{id:'c',name:'广泛 — 澳洲',status:'自动驾驶',tone:'ai',spend:'¥980',d:-4.2}]}/>
+</div>
+<div style={{flex:1,minWidth:0}}>
+<AgentTimeline items={[
+{stage:'diagnose',title:'再营销存在预算漏损',detail:'频次 4.8，点击率持续下滑',time:'13:44'},
+{stage:'strategise',title:'建议调整预算',detail:'每日 ¥1,200 转向「拉新 — 美国」',meta:'高置信度 · 21 天数据',time:'13:51'},
+{stage:'execute',title:'已暂停 3 个广告组',detail:'ROAS 连续 5 天低于 0.8',meta:'预计每周节省 ¥412',time:'14:02'}]}/>
+</div></div>
+<div><div className="lbl">轮次验证进度</div>
+<div className="grp" style={{gap:24}}><RoundsProgress done={0}/><RoundsProgress done={1}/><RoundsProgress done={3}/></div></div>
+<div><div className="lbl">宽表外框 + 吸底翻页条 · 每行都要有悬停反馈</div>
+<div style={{maxHeight:150,overflowY:'auto',paddingBottom:12,border:'1px solid var(--border-subtle)',borderRadius:'var(--radius-card)',padding:12}} className="huitou-scroll">
+<TableFrame>
+<table style={{width:'100%',minWidth:820,borderCollapse:'collapse',fontSize:13}}>
+<thead><tr>{['广告系列','状态','花费','转化','转化成本','ROI','成本变化'].map(h=>(
+<th key={h} style={{padding:'10px 16px',textAlign:'left',whiteSpace:'nowrap',fontSize:12,fontWeight:500,color:'var(--text-secondary)',background:'var(--neutral-25)',borderBottom:'1px solid var(--border-subtle)'}}>{h}</th>))}</tr></thead>
+<tbody>{[['拉新 — 美国','投放中','success','¥12,480','341','¥36.60','3.14',-12.4],['再营销 — DTC','已标记','warning','¥1,110','13','¥85.35','0.92',22.1]].map(r=>(
+<tr key={r[0]} {...TableRowHover()}>
+<td style={{padding:'12px 16px',whiteSpace:'nowrap',borderBottom:'1px solid var(--border-subtle)',fontWeight:500}}>{r[0]}</td>
+<td style={{padding:'12px 16px',whiteSpace:'nowrap',borderBottom:'1px solid var(--border-subtle)'}}><StatusDot tone={r[2]} label={r[1]}/></td>
+{[3,4,5,6].map(i=>(<td key={i} style={{padding:'12px 16px',textAlign:'right',whiteSpace:'nowrap',fontFamily:'var(--font-mono)',borderBottom:'1px solid var(--border-subtle)'}}>{r[i]}</td>))}
+<td style={{padding:'12px 16px',textAlign:'right',whiteSpace:'nowrap',borderBottom:'1px solid var(--border-subtle)'}}><StatDelta value={r[7]} goodWhen="down"/></td>
+</tr>))}</tbody>
+</table>
+</TableFrame>
+<StickyFooter><Pagination page={1} pageCount={6} total={106} onChange={()=>{}} pageSize={20} pageSizeOptions={[20,50,100]} onPageSizeChange={()=>{}}/></StickyFooter>
+</div></div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

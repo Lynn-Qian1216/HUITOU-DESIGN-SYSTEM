@@ -1,0 +1,31 @@
+<!-- @dsCard group="组件" viewport="700x1000" name="表单" subtitle="" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="../../node_modules/react/umd/react.development.js"></script>
+<script src="../../node_modules/react-dom/umd/react-dom.development.js"></script>
+<script src="../../node_modules/@babel/standalone/babel.min.js"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>html,body{margin:0}body{background:var(--surface-card);width:700px;height:1000px;overflow:hidden;padding:20px}.lbl{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--text-tertiary);margin-bottom:8px}.grp{display:flex;align-items:center;gap:10px;flex-wrap:wrap}</style></head>
+<body><div id="root"></div><script type="text/babel">
+const { Input, Textarea, Select, Checkbox, Radio, Switch, FormField, SegmentedControl, FilterSelect, DateField, DateRangeField, TimeRangeField } = window.HUITOUAIDesignSystem_52606d;
+
+function Demo(){
+const [paused,setPaused]=React.useState(true);const [selected,setSelected]=React.useState(false);const [selectionTouched,setSelectionTouched]=React.useState(false);const [driveMode,setDriveMode]=React.useState('auto');
+const [seg,setSeg]=React.useState('30d');const [on,setOn]=React.useState(true);const [ft,setFt]=React.useState('全部类型');const [pd,setPd]=React.useState('近 30 天');const [rg,setRg]=React.useState('近 7 天');const [d1,setD1]=React.useState('2025-10-28');const [d2,setD2]=React.useState('');const [ra,setRa]=React.useState(['2025-10-01','2025-10-28']);const [tw,setTw]=React.useState(['10:00','14:00']);
+return <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:'18px 24px'}}>
+<FormField label="搜索" hint="匹配广告系列与广告组名称"><Input placeholder="搜索广告系列" iconLeft="search"/></FormField>
+<FormField label="日预算" required error="超出账户上限 ¥1,000"><Input defaultValue="1200" suffix="元" invalid/></FormField>
+<FormField label="日期范围"><Select options={['近 7 天','近 30 天','本季度至今']} value={pd} onChange={(e)=>setPd(e.target.value)} width="100%"/></FormField>
+<FormField label="对比区间"><SegmentedControl options={['7d','30d','90d']} value={seg} onChange={setSeg}/></FormField>
+<FormField label="投放说明"><Textarea rows={3} maxRows={8} placeholder="描述你想达成的结果 —— 换行会自动长高，到 8 行出滚动条"/></FormField>
+<div><div className="lbl">日期 / 时间</div><div className="grp"><DateField value={d1} onChange={setD1}/><DateField value={d2} onChange={setD2}/><DateRangeField start={ra[0]} end={ra[1]} onChange={(s,e)=>setRa([s,e])} preset={rg} onPreset={setRg} presets={['今天','昨天','近 7 天','近 30 天','本月','上月']}/><TimeRangeField from={tw[0]} to={tw[1]} onChange={(a,b)=>setTw([a,b])}/></div></div>
+<FormField label="决策类型" hint="右侧计数由明细推导；命中 0 的项置灰保留"><FilterSelect value={ft} onChange={setFt} width="100%" options={[{label:'全部类型',count:24},{label:'改日预算',count:9},{label:'改出价',count:7},{label:'暂停广告',count:8},{label:'素材筛选',count:0}]}/></FormField>
+<div style={{display:'flex',flexDirection:'column',gap:12}}>
+<Checkbox checked={paused} onChange={()=>setPaused(v=>!v)} label="暂停表现不佳的广告组" description="ROAS 低于 0.8 连续 5 天"/>
+<Checkbox checked={selected} indeterminate={!selectionTouched} onChange={()=>{setSelectionTouched(true);setSelected(v=>!v);}} label="全选广告系列"/>
+<Radio checked={driveMode==='auto'} onChange={()=>setDriveMode('auto')} name="m" label="自动驾驶" description="无需审批即执行变更"/>
+<Radio checked={driveMode==='review'} onChange={()=>setDriveMode('review')} name="m" label="协同驾驶" description="生成变更方案待你审核"/>
+<Switch checked={on} onChange={setOn} label="每周简报"/>
+</div>
+</div>}
+ReactDOM.createRoot(document.getElementById('root')).render(<Demo />);
+</script></body></html>

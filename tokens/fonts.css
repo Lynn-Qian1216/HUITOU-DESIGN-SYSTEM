@@ -1,0 +1,4 @@
+/* 超大标题使用 Noto Serif SC（思源宋体）Heavy 900；正文与界面使用 Noto Sans SC（思源黑体），
+   拉丁文与数字使用 Geist / Geist Mono。
+   源文件未提供品牌字体二进制文件 —— 见 readme.md「字体替代说明」。 */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@700;900&display=swap");
