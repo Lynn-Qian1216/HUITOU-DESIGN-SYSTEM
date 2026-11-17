@@ -25,3 +25,6 @@ Thumbs.db
 /Canvas.dc.html
 /support.js
 /scripts/redesign-auth.cjs
+
+# Local preview screenshots
+/artifacts/
